@@ -1,0 +1,18 @@
+<div class="bg-gray-100 min-h-screen">
+
+    <div class="bg-gray-700 text-white p-4 text-2xl font-bold flex items-center">
+      <span class="bg-gray-500 w-6 h-6 rounded mr-2"></span>
+      Pokeverse | All Pokémon
+    </div>
+  
+    <div class="flex justify-center my-4">
+      <input type="text" placeholder="Search..." class="border border-gray-400 p-2 rounded w-1/3">
+    </div>
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 p-4">
+      <div *ngFor="let pokemon of pokemonList" class="bg-white shadow-md rounded-lg p-4 text-center">
+        <img [src]="pokemon.image" [alt]="pokemon.name" class="mx-auto w-24 h-24">
+        <h2 class="text-lg font-bold capitalize">{{ pokemon.name }}</h2>
+      </div>
+    </div>
+  </div>
