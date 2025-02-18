@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   squad$: Observable<any[]>;
 
   constructor(private http: HttpClient, private squadService: SquadService) {
-    this.squad$ = this.squadService.squad$;  // Subscribe to the squad state
+    this.squad$ = this.squadService.squad$;
   }
 
     ngOnInit(): void {

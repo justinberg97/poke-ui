@@ -3,7 +3,11 @@
     <span class="bg-gray-500 w-6 h-6 rounded mr-2"></span>
     Pokeverse | All Pokémon
   </div>
-
+  <div *ngIf="(squad$ | async)!.length >= 2" class="flex justify-center mt-4">
+    <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">
+      Battle
+    </button>
+  </div>
   <div class="flex justify-center my-4">
     <input type="text" placeholder="Search..." class="border border-gray-400 p-2 rounded w-1/3">
   </div>
@@ -26,10 +30,4 @@
       </button>
     </div>
   </div>
-
-  <!-- <div *ngIf="(squad$ | async)?.length >= 2" class="flex justify-center mt-4">
-    <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">
-      Battle
-    </button>
-  </div> -->
 </div>
