@@ -1,18 +1,35 @@
 <div class="bg-gray-100 min-h-screen">
+  <div class="bg-gray-700 text-white p-4 text-2xl font-bold flex items-center">
+    <span class="bg-gray-500 w-6 h-6 rounded mr-2"></span>
+    Pokeverse | All Pokémon
+  </div>
 
-    <div class="bg-gray-700 text-white p-4 text-2xl font-bold flex items-center">
-      <span class="bg-gray-500 w-6 h-6 rounded mr-2"></span>
-      Pokeverse | All Pokémon
-    </div>
-  
-    <div class="flex justify-center my-4">
-      <input type="text" placeholder="Search..." class="border border-gray-400 p-2 rounded w-1/3">
-    </div>
-    
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 p-4">
-      <div *ngFor="let pokemon of pokemonList" class="bg-white shadow-md rounded-lg p-4 text-center">
-        <img [src]="pokemon.image" [alt]="pokemon.name" class="mx-auto w-24 h-24">
-        <h2 class="text-lg font-bold capitalize">{{ pokemon.name }}</h2>
-      </div>
+  <div class="flex justify-center my-4">
+    <input type="text" placeholder="Search..." class="border border-gray-400 p-2 rounded w-1/3">
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 p-4">
+    <div *ngFor="let pokemon of pokemonList" class="bg-white shadow-md rounded-lg p-4 text-center">
+      <img [src]="pokemon.image" [alt]="pokemon.name" class="mx-auto w-24 h-24">
+      <h2 class="text-lg font-bold capitalize">{{ pokemon.name }}</h2>
+      <button
+        (click)="addPokemonToSquad(pokemon)"
+        [disabled]="isPokemonInSquad(pokemon)"
+        class="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:bg-gray-300">
+        Add to Squad
+      </button>
+      <button
+        *ngIf="isPokemonInSquad(pokemon)"
+        (click)="removePokemonFromSquad(pokemon)"
+        class="mt-2 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700">
+        Remove from Squad
+      </button>
     </div>
   </div>
+
+  <!-- <div *ngIf="(squad$ | async)?.length >= 2" class="flex justify-center mt-4">
+    <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">
+      Battle
+    </button>
+  </div> -->
+</div>

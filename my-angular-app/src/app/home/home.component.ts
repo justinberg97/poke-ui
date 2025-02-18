@@ -1,22 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { SquadService } from '../services/squad.service';  // Import the service
+import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   pokemonList: any[] = [];
   searchTerm: string = '';
+  squad$: Observable<any[]>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private squadService: SquadService) {
+    this.squad$ = this.squadService.squad$;  // Subscribe to the squad state
+  }
 
-  ngOnInit(): void {
+    ngOnInit(): void {
     this.fetchPokemon();
   }
 
@@ -27,5 +30,18 @@ export class HomeComponent implements OnInit {
         image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`
       }));
     });
+  }
+
+  addPokemonToSquad(pokemon: any): void {
+    this.squadService.addPokemonToSquad(pokemon);
+  }
+
+  removePokemonFromSquad(pokemon: any): void {
+    this.squadService.removePokemonFromSquad(pokemon);
+  }
+
+  isPokemonInSquad(pokemon: any): boolean {
+    let squad = this.squadService.squadSource.value;
+    return squad.some(p => p.name === pokemon.name);
   }
 }
